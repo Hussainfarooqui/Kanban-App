@@ -1,0 +1,6 @@
+[build]
+  command = "npm install --include=dev --prefix kanban-frontend && npm run build --prefix kanban-frontend"
+  publish = "kanban-frontend/dist"
+
+[build.environment]
+  NODE_VERSION = "18"

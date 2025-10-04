@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+
+:root{
+  --bg-900: #07070a;
+  --bg-800: #0e1115;
+  --surface-700: #121418;
+  --muted-400: #98a0a6;
+  --text-100: #e6eef6;
+  --accent-500: #1fb6ff; /* electric blue */
+  --accent-600: #0aa3ff;
+  --danger-500: #ff4d4f;
+  --card-shadow: 0 6px 20px rgba(0,0,0,0.6);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  background: linear-gradient(180deg,var(--bg-900) 0%, var(--bg-800) 60%);
+  color:var(--text-100);
+  min-height:100vh;
+  line-height:1.5;
+  padding:24px;
+}
+
+/* Layout helpers */
+.container{max-width:1280px;margin:0 auto}
+
+/* Buttons */
+button{
+  cursor:pointer;
+  font-family:inherit;
+  border-radius:8px;
+  border:1px solid transparent;
+  padding:10px 14px;
+  transition:all .18s ease;
+}
+
+.btn-primary{
+  background:linear-gradient(90deg,var(--accent-500),var(--accent-600));
+  color:var(--bg-900);
+  box-shadow:0 6px 18px rgba(15,120,200,0.12);
+}
+
+.btn-ghost{
+  background:transparent;color:var(--text-100);border:1px solid rgba(255,255,255,0.06)
+}
+
+.btn-danger{background:var(--danger-500);color:white}
+
+button:focus-visible{outline:3px solid rgba(31,182,255,0.18);outline-offset:3px}
+
+/* Inputs */
+input, textarea{
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  color:var(--text-100);
+  border:1px solid rgba(255,255,255,0.04);
+  padding:10px 12px;border-radius:8px;width:100%;
+}
+
+input::placeholder, textarea::placeholder{color:var(--muted-400)}
+
+/* Cards & columns */
+.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:16px;border-radius:12px;box-shadow:var(--card-shadow);border:1px solid rgba(255,255,255,0.03)}
+
+.kanban-board{display:flex;gap:16px;overflow-x:auto;padding-bottom:8px}
+.kanban-column{min-width:260px;background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
+.task-card{background:rgba(255,255,255,0.02);padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.03)}
+
+/* Scrollbar tuned for dark theme */
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#243b55,#0f1724);border-radius:10px}
+
+/* Animations and utilities */
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.fade-in{animation:fadeIn .24s ease both}
+
+/* Responsiveness */
+@media (max-width:768px){
+  .kanban-board{flex-direction:column;padding:0}
+  .kanban-column{min-width:100%}
+}
+
+/* Better stacking for very small screens */
+@media (max-width:480px){
+  .kanban-board{gap:12px}
+  .kanban-column{padding:12px;border-radius:10px}
+  .kanban-column .task-card{padding:10px;border-radius:8px}
+}
+
+/* Selection */
+::selection{background:rgba(31,182,255,0.12);color:var(--text-100)}
+
+/* Floating action button (FAB) */
+.fab{
+  position:fixed;
+  right:20px;
+  bottom:24px;
+  width:64px;height:64px;border-radius:999px;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(90deg,var(--accent-500),var(--accent-600));
+  color:var(--bg-900);font-weight:700;font-size:22px;
+  box-shadow:0 12px 30px rgba(15,120,200,0.18);z-index:60;cursor:pointer;
+  transition:transform .14s ease,box-shadow .14s ease,opacity .18s ease
+}
+.fab:active{transform:scale(.98)}
+.fab.hidden{opacity:0;pointer-events:none}
+
+@media (min-width:769px){
+  .fab{display:none}
+}

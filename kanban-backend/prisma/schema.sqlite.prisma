@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id       String   @id @default(uuid())
+  email    String   @unique
+  password String
+  name     String?
+
+  boards   Board[]
+}
+
+model Board {
+  id      String   @id @default(uuid())
+  name    String
+  ownerId String
+  owner   User     @relation(fields: [ownerId], references: [id])
+  columns Column[]
+}
+
+model Column {
+  id      String   @id @default(uuid())
+  title   String
+  boardId String
+  board   Board    @relation(fields: [boardId], references: [id])
+  tasks   Task[]
+}
+
+model Task {
+  id        String   @id @default(uuid())
+  title     String
+  status    String
+  columnId  String
+  column    Column   @relation(fields: [columnId], references: [id])
+}
